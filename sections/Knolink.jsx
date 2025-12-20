@@ -1,128 +1,185 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { ArrowRight, Brain, Zap, Lock, Sparkles, Monitor } from 'lucide-react';
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
-import styles from '../styles';
-import { fadeIn, staggerContainer, textVariant } from '../utils/motion';
+
+// --- Visual Components ---
+
+const SynthesisOrb = () => (
+    <div className="relative w-full h-full flex items-center justify-center min-h-[220px]">
+        <div className="absolute inset-0 flex items-center justify-center">
+            {/* The Orb */}
+            <div className="w-32 h-32 rounded-full bg-gradient-to-br from-dm-blue to-purple-500 blur-2xl opacity-40 animate-pulse-slow" />
+            <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                className="absolute w-40 h-40 border border-dashed border-dm-black/10 rounded-full"
+            />
+            <div className="bg-white rounded-full p-6 shadow-xl relative z-10 border border-gray-100">
+                <Brain className="w-10 h-10 text-dm-black" />
+            </div>
+        </div>
+        {/* Floating Inputs */}
+        <div className="absolute top-8 left-1/4 px-3 py-1 bg-white/80 rounded-full text-[10px] text-gray-500 border border-gray-100 backdrop-blur shadow-sm">Audio Input</div>
+        <div className="absolute bottom-12 right-1/4 px-3 py-1 bg-white/80 rounded-full text-[10px] text-gray-500 border border-gray-100 backdrop-blur shadow-sm">Visual Context</div>
+    </div>
+);
+
+const HudPreview = () => (
+    <div className="relative w-full h-full bg-[#111] rounded-2xl overflow-hidden border border-white/10 p-6 flex flex-col justify-between group">
+        <div className="flex justify-between items-start">
+            <div className="flex gap-2">
+                <div className="w-2 h-2 rounded-full bg-red-500" />
+                <div className="w-2 h-2 rounded-full bg-yellow-500" />
+            </div>
+            <div className="px-2 py-0.5 rounded bg-dm-blue/20 text-dm-blue text-[10px] font-mono uppercase">Live_Feed</div>
+        </div>
+
+        <div className="space-y-3 opacity-60 group-hover:opacity-100 transition-opacity">
+            <div className="w-3/4 h-2 bg-white/20 rounded-full animate-pulse" />
+            <div className="w-1/2 h-2 bg-white/20 rounded-full" />
+            <div className="w-full h-16 bg-white/5 rounded-lg border border-white/5 mt-4" />
+        </div>
+
+        <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-dm-blue/30 blur-2xl rounded-full" />
+    </div>
+);
 
 const Knolink = () => {
-    const [latency, setLatency] = useState(12);
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setLatency(Math.floor(Math.random() * (15 - 10 + 1) + 10));
-        }, 2000);
-        return () => clearInterval(interval);
-    }, []);
-
     return (
-        <section className={`${styles.yPaddings} sm:px-16 px-6 bg-off-white relative overflow-hidden`}>
-            <motion.div
-                variants={staggerContainer}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: false, amount: 0.25 }}
-                className={`${styles.innerWidth} mx-auto flex flex-col gap-10 relative z-10`}
-            >
+        <section className="py-20 md:py-32 px-6 bg-dm-white relative overflow-hidden">
+            {/* Background Decoration */}
+            <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+                <div className="absolute top-[10%] right-[-5%] w-[500px] h-[500px] bg-gray-100 rounded-full blur-[100px]" />
+            </div>
+
+            <div className="max-w-[1400px] mx-auto relative z-10">
+
                 {/* Header */}
-                <div className="flex flex-col items-center text-center mb-10">
-                    <motion.p variants={textVariant(1.1)} className="font-mono text-altair-violet text-[14px] uppercase tracking-[0.2em] mb-4 font-bold">
-                        Applied Latency Research
-                    </motion.p>
-                    <motion.h2 variants={textVariant(1.2)} className="font-serif font-bold text-[48px] md:text-[72px] text-carbon mb-6 tracking-tight">
-                        Knolink: The Invisible Interface.
-                    </motion.h2>
-                    <motion.p variants={textVariant(1.3)} className="font-sans text-slate text-[20px] leading-[1.6] max-w-[800px]">
-                        A real-time cognitive overlay that augments human conversation. Running on the Axis edge network, Knolink perceives audio and visual context to provide instant, sovereign intelligence.
-                    </motion.p>
-                </div>
-
-                {/* The "Ghost Layer" Visual */}
-                <motion.div
-                    variants={fadeIn('up', 'tween', 0.5, 1)}
-                    className="relative w-full h-[500px] bg-cover bg-center rounded-2xl overflow-hidden shadow-2xl border border-carbon/5 group"
-                    style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80")' }}
-                >
-                    {/* Overlay Gradient simulating desktop wallpaper dimming */}
-                    <div className="absolute inset-0 bg-deep-obsidian/20" />
-
-                    {/* The Glass Layer */}
-                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%] glass-panel rounded-xl flex flex-col p-8 gap-4 shadow-[0_8px_32px_rgba(0,0,0,0.1)] backdrop-blur-xl border border-white/40">
-                        {/* Floating Suggestions */}
-                        <motion.div
-                            animate={{ y: [0, -5, 0] }}
-                            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                            className="flex flex-col gap-3"
-                        >
-                            <div className="flex items-center gap-3">
-                                <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                                <span className="font-mono text-[10px] text-slate/60 uppercase tracking-wider">Live Transcription</span>
-                            </div>
-                            <p className="font-serif text-[24px] text-carbon leading-tight italic">
-                                "The user is asking about scalability constraints. Suggest referencing <span className="text-altair-violet underline decoration-1 underline-offset-4">node distribution topology</span>."
-                            </p>
-                            <div className="mt-4 p-4 bg-white/50 rounded-lg border border-carbon/5">
-                                <span className="font-mono text-[12px] text-slate block mb-2 font-bold">REBUTTAL GENERATED</span>
-                                <p className="font-sans text-[14px] text-carbon">
-                                    "Our protocol ensures zero-redundancy verification, effectively removing the bottleneck found in traditional centralized clusters."
-                                </p>
-                            </div>
-                        </motion.div>
-
-                        {/* Latency Indicator */}
-                        <div className="absolute bottom-4 right-4 flex items-center gap-2 px-3 py-1 bg-deep-obsidian/90 rounded-full border border-white/10">
-                            <div className="w-1.5 h-1.5 rounded-full bg-electric-blue animate-pulse" />
-                            <span className="font-mono text-[10px] text-white/80">
-                                Inference: {latency}ms | Node [ZA-JNB-04]
-                            </span>
+                <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="max-w-3xl"
+                    >
+                        <div className="flex items-center gap-3 mb-6">
+                            <span className="w-2 h-2 rounded-full bg-dm-blue" />
+                            <span className="font-mono text-sm text-dm-text-secondary uppercase tracking-widest">Applied Latency Research</span>
                         </div>
-                    </div>
-                </motion.div>
+                        <h2 className="text-4xl sm:text-5xl md:text-7xl font-medium text-dm-black tracking-tight leading-[0.95] mb-6">
+                            The Invisible <br />
+                            <span className="text-gray-300">Interface.</span>
+                        </h2>
+                        <p className="text-xl text-gray-500 leading-relaxed max-w-xl">
+                            Knolink is a real-time cognitive overlay. It runs on the edge, interpreting reality to provide sovereign intelligence when you need it most.
+                        </p>
+                    </motion.div>
 
-                {/* Feature Triptych */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mt-10">
-                    {[
-                        {
-                            title: 'Ambient Perception',
-                            subtitle: '(Formerly: Hidden Overlay)',
-                            desc: 'A non-intrusive, privacy-first layer that ingests multimodal inputs—voice audio and on-screen content (OCR)—simultaneously.',
-                        },
-                        {
-                            title: 'Contextual Reasoning',
-                            subtitle: '(Formerly: Real-time Prompts)',
-                            desc: 'Knolink doesn\'t just transcribe; it anticipates. It projects suggestions, factual rebuttals, and talk tracks onto your screen the moment they are needed.',
-                        },
-                        {
-                            title: 'Enterprise Recall',
-                            subtitle: '(Formerly: CRM/Knowledge Base)',
-                            desc: 'Connect your entire organizational memory. Knolink retrieves product specifications and historical context instantly.',
-                        }
-                    ].map((feature, index) => (
-                        <motion.div
-                            key={feature.title}
-                            variants={fadeIn('up', 'tween', 0.5 + (index * 0.2), 1)}
-                            className="flex flex-col gap-4 p-6 hover:bg-white/50 rounded-lg transition-colors border border-transparent hover:border-carbon/5"
-                        >
-                            <span className="font-mono text-[12px] text-altair-violet uppercase tracking-wider font-bold">0{index + 1}</span>
-                            <h3 className="font-serif font-bold text-[24px] text-carbon">{feature.title}</h3>
-                            <p className="font-sans text-slate text-[16px] leading-[1.6]">
-                                {feature.desc}
-                            </p>
-                        </motion.div>
-                    ))}
+                    <Link href="/knolink" className="group flex items-center gap-2 text-dm-black border-b border-dm-black/20 pb-1 hover:border-dm-black transition-colors">
+                        <span className="font-mono text-sm uppercase tracking-wide">Explore Knolink</span>
+                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                    </Link>
                 </div>
 
-                {/* Call to Action */}
-                <motion.div variants={fadeIn('up', 'tween', 1, 1)} className="flex justify-center mt-8">
-                    <Link href="/knolink" className="group relative px-8 py-4 bg-transparent border border-carbon text-carbon overflow-hidden rounded-full transition-all hover:bg-carbon hover:text-off-white inline-block">
-                        <span className="relative z-10 font-mono text-[14px] font-bold uppercase tracking-wider flex items-center gap-2">
-                            Explore the Platform <span>→</span>
-                        </span>
-                    </Link>
-                </motion.div>
+                {/* Bento Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[minmax(300px,auto)]">
 
-            </motion.div>
+                    {/* 1. Synthesis Engine - Large Card */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.1 }}
+                        whileHover={{ scale: 1.01 }}
+                        className="md:col-span-2 bg-dm-gray rounded-[32px] p-8 md:p-10 flex flex-col md:flex-row items-center gap-8 group"
+                    >
+                        <div className="flex-1 order-2 md:order-1">
+                            <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center mb-6 shadow-sm">
+                                <Brain className="w-6 h-6 text-dm-blue" />
+                            </div>
+                            <h3 className="text-2xl font-medium mb-3">Cognitive Synthesis</h3>
+                            <p className="text-gray-500 leading-relaxed">
+                                A live knowledge graph that scans audio and visual feeds to retrieve context instantly. It thinks alongside you.
+                            </p>
+                        </div>
+                        <div className="w-full md:w-1/2 order-1 md:order-2">
+                            <SynthesisOrb />
+                        </div>
+                    </motion.div>
+
+                    {/* 2. Latency Stats - Dark Card */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.2 }}
+                        whileHover={{ scale: 1.02 }}
+                        className="md:col-span-1 bg-dm-black text-white rounded-[32px] p-8 flex flex-col justify-between relative overflow-hidden"
+                    >
+                        <div className="relative z-10">
+                            <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mb-8 backdrop-blur">
+                                <Zap className="w-6 h-6 text-yellow-400" />
+                            </div>
+                            <h3 className="text-2xl font-medium mb-2">Zero Latency</h3>
+                            <p className="text-white/60 text-sm">Powered by the Apolemia grid for sub-20ms inference.</p>
+                        </div>
+                        <div className="mt-8 flex items-end gap-1 h-16 opacity-50">
+                            {[40, 65, 45, 80, 55, 90, 70].map((h, i) => (
+                                <div key={i} className="flex-1 bg-dm-blue rounded-t-sm" style={{ height: `${h}%` }} />
+                            ))}
+                        </div>
+                    </motion.div>
+
+                    {/* 3. Undetectable Overlay - Visual Card */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.3 }}
+                        whileHover={{ scale: 1.02 }}
+                        className="md:col-span-1 bg-white border border-gray-100 rounded-[32px] p-8 flex flex-col justify-between shadow-sm"
+                    >
+                        <div>
+                            <div className="w-12 h-12 rounded-full bg-dm-gray flex items-center justify-center mb-6">
+                                <Lock className="w-6 h-6 text-dm-text-primary" />
+                            </div>
+                            <h3 className="text-2xl font-medium mb-2">Undetectable</h3>
+                            <p className="text-gray-500 text-sm">Invisible to screen sharing. Your private intelligence layer.</p>
+                        </div>
+                        <div className="mt-6 aspect-video rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-center relative overflow-hidden">
+                            <div className="text-[10px] text-gray-400 font-mono uppercase">Screen Share Safe</div>
+                            <div className="absolute inset-0 bg-green-500/10 mix-blend-multiply" />
+                        </div>
+                    </motion.div>
+
+                    {/* 4. HUD Preview - Wide Card */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.4 }}
+                        whileHover={{ scale: 1.01 }}
+                        className="md:col-span-2 bg-[#0A0A0A] rounded-[32px] p-2 relative overflow-hidden group"
+                    >
+                        <div className="absolute inset-0 bg-gradient-to-br from-dm-blue/20 to-transparent opacity-20 group-hover:opacity-30 transition-opacity" />
+                        <div className="absolute top-8 left-8 z-10">
+                            <div className="flex items-center gap-2 mb-2">
+                                <Sparkles className="w-4 h-4 text-white" />
+                                <span className="text-xs font-mono text-white/80 uppercase tracking-widest">Vision Engine</span>
+                            </div>
+                            <h3 className="text-2xl font-medium text-white">Multimodal HUD</h3>
+                        </div>
+
+                        <div className="w-full h-full pl-64 pt-8">
+                            <HudPreview />
+                        </div>
+                    </motion.div>
+
+                </div>
+
+            </div>
         </section>
     );
 };

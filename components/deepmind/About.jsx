@@ -2,54 +2,26 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
+import { Network, Server, ArrowRight, Activity, Cpu } from 'lucide-react';
+import Link from 'next/link';
 
-// Decryption Effect Component
-const DecryptText = ({ text, className }) => {
-    const [displayText, setDisplayText] = useState('');
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()';
-    const ref = useRef(null);
-    const isInView = useInView(ref, { once: true, amount: 0.5 });
-
-    useEffect(() => {
-        if (!isInView) return;
-
-        let iteration = 0;
-        const interval = setInterval(() => {
-            setDisplayText(
-                text
-                    .split('')
-                    .map((char, index) => {
-                        if (index < iteration) return text[index];
-                        return chars[Math.floor(Math.random() * chars.length)];
-                    })
-                    .join('')
-            );
-
-            if (iteration >= text.length) clearInterval(interval);
-            iteration += 1 / 2; // Speed of decryption
-        }, 30);
-
-        return () => clearInterval(interval);
-    }, [isInView, text]);
-
-    return <span ref={ref} className={className}>{displayText}</span>;
-};
-
-// Telemetry Card Component
-const TelemetryCard = ({ label, value, subtext }) => (
+// Telemetry Card Component - Refined for "White Theme"
+const TelemetryCard = ({ label, value, subtext, icon: Icon }) => (
     <motion.div
-        whileHover={{ scale: 1.02, backgroundColor: "rgba(255,255,255,0.08)" }}
-        className="p-6 md:p-8 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm flex flex-col justify-between h-full group transition-colors"
+        whileHover={{ scale: 1.02, y: -2 }}
+        className="p-8 rounded-[32px] bg-white border border-gray-100 shadow-sm flex flex-col justify-between h-full group"
     >
-        <div className="flex justify-between items-start mb-4">
-            <span className="font-mono text-xs text-dm-teal uppercase tracking-widest leading-none">{label}</span>
-            <div className="w-1.5 h-1.5 rounded-full bg-dm-teal animate-pulse" />
+        <div className="flex justify-between items-start mb-6">
+            <span className="font-mono text-xs text-dm-text-secondary uppercase tracking-widest">{label}</span>
+            <div className="w-8 h-8 rounded-full bg-dm-gray flex items-center justify-center">
+                <Icon className="w-4 h-4 text-dm-black" />
+            </div>
         </div>
         <div>
-            <div className="text-3xl md:text-5xl font-mono text-white tracking-tighter mb-2 group-hover:text-dm-teal transition-colors">
+            <div className="text-4xl md:text-5xl font-medium text-dm-black tracking-tighter mb-2 group-hover:text-dm-blue transition-colors">
                 {value}
             </div>
-            <div className="text-xs text-gray-500 font-mono">{subtext}</div>
+            <div className="text-sm text-gray-400 font-sans">{subtext}</div>
         </div>
     </motion.div>
 );
@@ -61,81 +33,103 @@ const About = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             setNodes(prev => prev + Math.floor(Math.random() * 5) - 2);
-        }, 2000);
+        }, 3000);
         return () => clearInterval(interval);
     }, []);
 
     return (
-        <section className="relative py-32 px-6 bg-dm-black text-white overflow-hidden">
-            {/* Grid Background */}
-            <div className="absolute inset-0 z-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] opacity-20" />
+        <section className="relative py-20 md:py-32 px-6 bg-dm-white overflow-hidden">
+            {/* Background Decoration (Matching Knolink) */}
+            <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+                <div className="absolute bottom-[10%] left-[-5%] w-[600px] h-[600px] bg-gray-50 rounded-full blur-[120px]" />
+            </div>
 
             <div className="relative z-10 max-w-[1400px] mx-auto">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 auto-rows-[minmax(180px,auto)]">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 auto-rows-[minmax(200px,auto)]">
 
-                    {/* Main Mission Block (Large) */}
+                    {/* Main Mission Block (Large) - White Theme */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="lg:col-span-8 lg:row-span-2 p-8 md:p-12 rounded-[2rem] bg-gradient-to-br from-white/10 to-white/5 border border-white/10 backdrop-blur-xl flex flex-col justify-center"
+                        className="md:col-span-12 lg:col-span-8 lg:row-span-2 p-6 md:p-10 lg:p-14 rounded-[40px] bg-dm-gray flex flex-col justify-center relative overflow-hidden"
                     >
-                        <span className="font-mono text-xs text-dm-blue uppercase tracking-widest mb-6 block">// Mission Protocol</span>
-                        <h2 className="text-4xl md:text-6xl lg:text-7xl font-medium tracking-tight leading-[1] mb-8">
-                            <span className="text-gray-500">Decoupling intelligence from the data center.</span> <br />
-                            <span className="text-white">Returning it to the network.</span>
-                        </h2>
-                        <p className="text-lg text-gray-400 max-w-2xl leading-relaxed">
-                            We believe that the current trajectory of AI is constrained by a fundamental irony: software is becoming fluid, while hardware becomes opaque. Altair Axis is the "backbone" that unifies the world's compute into a single, sovereign fabric.
-                        </p>
+                        {/* Abstract Shape */}
+                        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-white/40 rounded-full blur-[80px] pointer-events-none" />
+
+                        <div className="relative z-10">
+                            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/50 border border-white/20 backdrop-blur-sm mb-8 w-fit">
+                                <span className="w-2 h-2 rounded-full bg-dm-blue animate-pulse" />
+                                <span className="font-mono text-xs text-dm-black/70 uppercase tracking-widest">Core Philosophy</span>
+                            </span>
+
+                            <h2 className="text-4xl md:text-6xl lg:text-7xl font-medium text-dm-black tracking-tighter leading-[0.95] mb-8">
+                                <span className="text-gray-400">Decoupling intelligence</span> <br />
+                                from the data center.
+                            </h2>
+                            <p className="text-xl text-gray-500 max-w-2xl leading-relaxed">
+                                We are returning compute to the edges of the network. Altair Axis unifies the world's fragmented hardware into a single, sovereign silicone fabric.
+                            </p>
+                        </div>
                     </motion.div>
 
                     {/* Telemetry: Active Nodes */}
-                    <div className="lg:col-span-4 lg:row-span-1">
+                    <div className="md:col-span-6 lg:col-span-4 lg:row-span-1">
                         <TelemetryCard
                             label="Active Nodes"
                             value={nodes.toLocaleString()}
-                            subtext="Global distributed workers online"
+                            subtext="Distributed GPUs online"
+                            icon={Server}
                         />
                     </div>
 
                     {/* Telemetry: Latency */}
-                    <div className="lg:col-span-4 lg:row-span-1">
+                    <div className="md:col-span-6 lg:col-span-4 lg:row-span-1">
                         <TelemetryCard
-                            label="Network Latency"
+                            label="Avg. Latency"
                             value="14ms"
-                            subtext="Average global p2p response time"
+                            subtext="Global P2P response time"
+                            icon={Activity}
                         />
                     </div>
 
-                    {/* "Join The Grid" CTA */}
-                    <motion.a
-                        href="/apolemia"
-                        whileHover={{ scale: 0.98 }}
-                        className="lg:col-span-4 lg:row-span-1 p-8 rounded-2xl bg-dm-blue text-white flex flex-col justify-between group overflow-hidden relative"
+                    {/* "Join The Grid" CTA - Dark Blue Accent */}
+                    <motion.div
+                        whileHover={{ scale: 1.02 }}
+                        className="md:col-span-6 lg:col-span-4 lg:row-span-1"
                     >
-                        <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                        <span className="font-mono text-xs uppercase tracking-widest">Connect</span>
-                        <div className="text-2xl font-medium flex items-center gap-2">
-                            Deploy Node
-                            <span className="group-hover:translate-x-2 transition-transform">→</span>
-                        </div>
-                    </motion.a>
+                        <Link href="/apolemia" className="block h-full p-8 rounded-[32px] bg-dm-black text-white flex flex-col justify-between group overflow-hidden relative shadow-lg">
+                            <div className="absolute inset-0 bg-gradient-to-br from-dm-blue/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                    {/* "Read Manifesto" Block */}
-                    <motion.a
-                        href="/about"
-                        whileHover={{ scale: 0.98 }}
-                        className="lg:col-span-8 lg:row-span-1 p-8 rounded-2xl bg-[#111] border border-white/10 flex items-center justify-between group"
+                            <div className="relative z-10">
+                                <Cpu className="w-8 h-8 text-white mb-4" />
+                                <span className="font-mono text-xs uppercase tracking-widest text-gray-400">Network Access</span>
+                            </div>
+
+                            <div className="relative z-10 flex items-center justify-between">
+                                <span className="text-2xl font-medium">Deploy Node</span>
+                                <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all">
+                                    <ArrowRight className="w-5 h-5" />
+                                </div>
+                            </div>
+                        </Link>
+                    </motion.div>
+
+                    {/* "Read Manifesto" Block - Light */}
+                    <motion.div
+                        whileHover={{ scale: 1.01 }}
+                        className="md:col-span-6 lg:col-span-8 lg:row-span-1"
                     >
-                        <div>
-                            <span className="font-mono text-xs text-gray-500 uppercase tracking-widest mb-2 block">Altair Axis Research</span>
-                            <h3 className="text-2xl font-medium text-white group-hover:text-dm-teal transition-colors">Read the full Architecture of Intelligence.</h3>
-                        </div>
-                        <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-                        </div>
-                    </motion.a>
+                        <Link href="/about" className="block h-full p-10 rounded-[32px] bg-white border border-gray-100 flex md:flex-row flex-col items-center justify-between gap-6 group shadow-sm hover:shadow-md transition-shadow">
+                            <div>
+                                <span className="font-mono text-xs text-dm-blue uppercase tracking-widest mb-3 block">Research Manifesto</span>
+                                <h3 className="text-3xl font-medium text-dm-black group-hover:text-dm-blue transition-colors">The Architecture of Intelligence.</h3>
+                            </div>
+                            <div className="flex-shrink-0 px-6 py-3 rounded-full border border-gray-200 text-dm-black font-medium group-hover:bg-dm-black group-hover:text-white transition-colors">
+                                Read Paper
+                            </div>
+                        </Link>
+                    </motion.div>
 
                 </div>
             </div>

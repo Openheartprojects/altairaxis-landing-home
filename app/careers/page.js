@@ -17,14 +17,14 @@ export default function Careers() {
         <main className="min-h-screen bg-dm-white text-dm-black selection:bg-dm-teal selection:text-white font-sans">
             <Navbar />
 
-            <section className="pt-48 pb-24 px-6">
+            <section className="pt-32 md:pt-48 pb-24 px-6">
                 <div className="max-w-[1200px] mx-auto">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8 }}
                     >
-                        <h1 className="text-6xl md:text-8xl font-medium tracking-tighter mb-12">
+                        <h1 className="text-4xl sm:text-5xl md:text-8xl font-medium tracking-tighter mb-8 md:mb-12">
                             Join the <br />
                             <span className="text-dm-blue">Frontier.</span>
                         </h1>
@@ -53,9 +53,9 @@ export default function Careers() {
                         ))}
                     </div>
 
-                    <div className="mt-24 p-12 bg-dm-black text-white rounded-[32px] overflow-hidden relative">
+                    <div className="mt-12 md:mt-24 p-8 md:p-12 bg-dm-black text-white rounded-[32px] overflow-hidden relative">
                         <div className="absolute inset-0 bg-gradient-to-br from-dm-blue/20 to-dm-teal/20" />
-                        <div className="relative z-10 flex flex-col md:flex-row justify-between items-center gap-8">
+                        <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
                             <h3 className="text-3xl font-serif">Don't see your role?</h3>
                             <button className="px-8 py-4 bg-white text-black rounded-full font-medium hover:bg-gray-200 transition-colors">
                                 Email us anyway

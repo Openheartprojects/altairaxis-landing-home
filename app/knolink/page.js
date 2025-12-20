@@ -93,7 +93,7 @@ const KnolinkPage = () => {
             <Navbar />
 
             {/* Hero Section (Original Layout, New Copy) */}
-            <section className="relative pt-[180px] pb-24 px-6 md:px-12 max-w-[1600px] mx-auto">
+            <section className="relative pt-32 md:pt-[180px] pb-24 px-6 md:px-12 max-w-[1600px] mx-auto">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -105,7 +105,7 @@ const KnolinkPage = () => {
                         <span className="text-xs font-medium tracking-wide uppercase text-dm-text-secondary">Project Two</span>
                     </div>
 
-                    <h1 className="text-6xl md:text-[7rem] leading-[0.95] font-medium tracking-tighter mb-12 text-dm-black">
+                    <h1 className="text-4xl sm:text-5xl md:text-[7rem] leading-[0.95] font-medium tracking-tighter mb-8 md:mb-12 text-dm-black">
                         The Sovereign <br />
                         <span className="text-gray-400">Intelligence Interface.</span>
                     </h1>
@@ -129,12 +129,12 @@ const KnolinkPage = () => {
 
             {/* Features Grid (Original Bento Layout, New Visuals & Content) */}
             <section className="py-24 px-6 md:px-12 max-w-[1600px] mx-auto">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
                     {/* 1. Deep Context / Synthesis Orb */}
                     <motion.div
                         whileHover={{ scale: 1.01 }}
-                        className="md:col-span-2 bg-dm-gray rounded-[24px] p-8 flex flex-col md:flex-row items-center gap-8 group"
+                        className="md:col-span-2 lg:col-span-2 bg-dm-gray rounded-[24px] p-8 flex flex-col md:flex-row items-center gap-8 group"
                     >
                         <div className="flex-1">
                             <div className="w-12 h-12 rounded-full flex items-center justify-center bg-white/50 mb-6 backdrop-blur-sm">
@@ -153,7 +153,7 @@ const KnolinkPage = () => {
                     {/* 2. Grid Power */}
                     <motion.div
                         whileHover={{ scale: 1.01 }}
-                        className="md:col-span-1 bg-dm-black text-white rounded-[24px] p-8 flex flex-col justify-between"
+                        className="md:col-span-1 lg:col-span-1 bg-dm-black text-white rounded-[24px] p-8 flex flex-col justify-between"
                     >
                         <div className="w-12 h-12 rounded-full flex items-center justify-center bg-white/10 mb-8 backdrop-blur-sm">
                             <Zap className="w-6 h-6 text-white" />
@@ -170,7 +170,7 @@ const KnolinkPage = () => {
                     {/* 3. Privacy */}
                     <motion.div
                         whileHover={{ scale: 1.01 }}
-                        className="md:col-span-1 border border-gray-200 rounded-[24px] p-8 flex flex-col justify-between"
+                        className="md:col-span-1 lg:col-span-1 border border-gray-200 rounded-[24px] p-8 flex flex-col justify-between"
                     >
                         <div className="w-12 h-12 rounded-full flex items-center justify-center bg-dm-gray mb-8 backdrop-blur-sm">
                             <Lock className="w-6 h-6 text-dm-teal" />
@@ -184,7 +184,7 @@ const KnolinkPage = () => {
                     {/* 4. Undetectable / Knowledge Sync */}
                     <motion.div
                         whileHover={{ scale: 1.01 }}
-                        className="md:col-span-2 bg-dm-blue text-white rounded-[24px] p-8 flex flex-col md:flex-row items-center gap-8 relative overflow-hidden"
+                        className="md:col-span-2 lg:col-span-2 bg-dm-blue text-white rounded-[24px] p-8 flex flex-col md:flex-row items-center gap-8 relative overflow-hidden"
                     >
                         {/* Background texture matching old design vibe */}
                         <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-[80px] pointer-events-none" />
