@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from 'framer-motion';
 import { ArrowRight, Sparkles, Zap, Globe, Cpu } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
+import { pressReleases } from '../../data/press';
 
 // Slide Data
 const slides = [
@@ -48,6 +50,7 @@ const slides = [
 const IncredibleHero = () => {
     const [activeIndex, setActiveIndex] = useState(0);
     const [direction, setDirection] = useState(1); // 1 for next, -1 for prev
+    const [notificationIndex, setNotificationIndex] = useState(0);
 
     // Mouse Parallax
     const mouseX = useMotionValue(0);
@@ -73,10 +76,18 @@ const IncredibleHero = () => {
         return () => window.removeEventListener('mousemove', handleMouseMove);
     }, [mouseX, mouseY]);
 
-    // Auto-play
+    // Auto-play for slides
     useEffect(() => {
         const interval = setInterval(() => {
             nextSlide();
+        }, 5000);
+        return () => clearInterval(interval);
+    }, []);
+
+    // Auto-play for notification cycling
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setNotificationIndex((prev) => (prev + 1) % pressReleases.length);
         }, 5000);
         return () => clearInterval(interval);
     }, []);
@@ -146,6 +157,45 @@ const IncredibleHero = () => {
 
     return (
         <section className="relative w-full h-[85vh] min-h-[600px] flex items-center justify-center overflow-hidden bg-dm-white text-black">
+
+            {/* Notification Bar */}
+            <div className="absolute top-24 md:top-28 left-0 right-0 z-40 flex justify-center pointer-events-none">
+                <AnimatePresence mode="wait">
+                    <motion.div
+                        key={notificationIndex}
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 10 }}
+                        transition={{ duration: 0.5 }}
+                        className="pointer-events-auto"
+                    >
+                        <Link href={`/press/${pressReleases[notificationIndex].slug}`}>
+                            <div className={`
+                                flex items-center gap-3 px-4 py-2 rounded-full backdrop-blur-md transition-all duration-300
+                                ${notificationIndex === 0
+                                    ? 'bg-white/80 border border-blue-500/30 shadow-[0_0_20px_rgba(37,99,235,0.2)] hover:shadow-[0_0_30px_rgba(37,99,235,0.4)]'
+                                    : 'bg-white/50 border border-black/5 hover:bg-white/80'
+                                }
+                            `}>
+                                {notificationIndex === 0 && (
+                                    <span className="relative flex h-2 w-2">
+                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                                        <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                                    </span>
+                                )}
+                                <span className={`text-xs font-medium ${notificationIndex === 0 ? 'text-blue-600' : 'text-gray-500'}`}>
+                                    {notificationIndex === 0 ? 'Latest Update' : 'From the Archive'}
+                                </span>
+                                <span className="w-[1px] h-3 bg-black/10 mx-1" />
+                                <span className="text-sm text-dm-black font-medium max-w-[200px] sm:max-w-xs truncate">
+                                    {pressReleases[notificationIndex].title}
+                                </span>
+                                <ArrowRight className={`w-3 h-3 ${notificationIndex === 0 ? 'text-blue-500' : 'text-gray-400'}`} />
+                            </div>
+                        </Link>
+                    </motion.div>
+                </AnimatePresence>
+            </div>
 
             {/* 1. Volumetric Background Atmosphere - White Theme Adjusted */}
             <div className="absolute inset-0 z-0">
@@ -303,3 +353,4 @@ const IncredibleHero = () => {
 };
 
 export default IncredibleHero;
+

@@ -1,61 +1,94 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import Navbar from '../../components/deepmind/Navbar';
 import Footer from '../../components/deepmind/Footer';
-import { motion } from 'framer-motion';
+import Link from 'next/link';
+import { ArrowRight, Activity, Cpu, Shield } from 'lucide-react';
+import { pressReleases, updatesFeed } from '../../data/press';
 
-const releases = [
-    { date: "December 15, 2024", title: "Altair Axis raises $40M Series A led by Paradigm", source: "Business Wire" },
-    { date: "November 28, 2024", title: "Introducing Apolemia: The World's First Cognitive Fabric", source: "Medium" },
-    { date: "October 10, 2024", title: "Benchmarks: KnoLink outperforms GPT-4 on latency-critical tasks", source: "arXiv" },
-];
-
-export default function Press() {
+const PressPage = () => {
     return (
-        <main className="min-h-screen bg-dm-white text-dm-black selection:bg-dm-teal selection:text-white font-sans">
+        <main className="min-h-screen bg-dm-white text-dm-text-primary font-sans selection:bg-dm-blue selection:text-white">
             <Navbar />
 
-            <section className="pt-48 pb-24 px-6">
-                <div className="max-w-[1200px] mx-auto">
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
-                    >
-                        <span className="font-mono text-sm uppercase tracking-wider text-dm-blue mb-6 block">Newsroom</span>
-                        <h1 className="text-6xl md:text-8xl font-serif font-medium tracking-tight mb-24 text-dm-black">
-                            Latest Updates
-                        </h1>
-                    </motion.div>
-
-                    <div className="grid grid-cols-1 gap-16">
-                        {releases.map((item, idx) => (
-                            <motion.a
-                                href="#"
-                                key={idx}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ delay: idx * 0.1 }}
-                                className="group block border-t border-gray-200 pt-16 hover:border-dm-blue transition-colors duration-500"
-                            >
-                                <div className="flex flex-col md:flex-row md:items-baseline gap-4 md:gap-16">
-                                    <span className="font-mono text-sm text-gray-500 w-[150px]">{item.date}</span>
-                                    <div className="flex-1">
-                                        <h3 className="text-3xl md:text-4xl font-light leading-tight group-hover:text-dm-blue transition-colors duration-300">
-                                            {item.title}
-                                        </h3>
-                                        <span className="inline-block mt-4 text-sm font-medium uppercase tracking-wider text-gray-400">
-                                            {item.source}
-                                        </span>
-                                    </div>
-                                </div>
-                            </motion.a>
-                        ))}
-                    </div>
-                </div>
+            {/* Header */}
+            <section className="pt-[160px] pb-16 px-6 md:px-12 max-w-[1400px] mx-auto border-b border-gray-100">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                >
+                    <p className="font-medium text-dm-blue text-sm uppercase tracking-widest mb-6">
+                        Technical Progress & Milestones
+                    </p>
+                    <h1 className="font-serif text-5xl md:text-7xl text-dm-black mb-6 tracking-tight max-w-4xl">
+                        Building the Universal Grid.
+                    </h1>
+                    <p className="text-xl text-gray-500 max-w-2xl leading-relaxed">
+                        Verified benchmarks and engineering updates from the Apolemia core team.
+                    </p>
+                </motion.div>
             </section>
+
+            <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-16 grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-24">
+
+                {/* Main Content: Milestones */}
+                <div className="space-y-16">
+                    {pressReleases.map((item, index) => (
+                        <motion.div
+                            key={item.id}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: index * 0.1 }}
+                            className="group"
+                        >
+                            <Link href={`/press/${item.slug}`} className="block">
+                                <span className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 block">{item.date} — {item.category}</span>
+                                <h2 className="font-serif text-3xl md:text-4xl text-dm-black mb-4 group-hover:text-dm-blue transition-colors">
+                                    {item.title}
+                                </h2>
+                                <p className="text-lg text-gray-600 leading-relaxed mb-6">
+                                    {item.description}
+                                </p>
+                                <div className="flex items-center gap-2 text-dm-blue font-medium group-hover:underline underline-offset-4">
+                                    Read Full Report <ArrowRight className="w-4 h-4" />
+                                </div>
+                            </Link>
+                            <div className="h-[1px] bg-gray-100 mt-12 w-full" />
+                        </motion.div>
+                    ))}
+                </div>
+
+                {/* Sidebar: Mini-Updates */}
+                <aside className="relative">
+                    <div className="sticky top-32">
+                        <div className="bg-gray-50 rounded-2xl p-8 border border-gray-100">
+                            <div className="flex items-center gap-3 mb-8">
+                                <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                                <h3 className="font-medium text-dm-black uppercase tracking-widest text-xs">Live Engineering Updates</h3>
+                            </div>
+
+                            <div className="relative border-l border-gray-200 pl-6 space-y-10">
+                                {updatesFeed.map((update, i) => (
+                                    <div key={i} className="relative">
+                                        <div className="absolute -left-[29px] top-1.5 w-1.5 h-1.5 rounded-full bg-gray-300 ring-4 ring-gray-50" />
+                                        <div className="text-xs font-bold text-dm-black mb-2">{update.date}</div>
+                                        <p className="text-sm text-gray-600 leading-relaxed">
+                                            {update.content}
+                                        </p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
 
             <Footer />
         </main>
     );
-}
+};
+
+export default PressPage;

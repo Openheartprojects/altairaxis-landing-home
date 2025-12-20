@@ -51,9 +51,14 @@ const Footer = () => (
             Altair Axis
           </h2>
         </Link>
-        <p className="font-sans text-[14px] text-slate opacity-60">
-          © 2025 Altair Axis Research Lab.
-        </p>
+        <div className="flex flex-col md:items-end items-center">
+          <p className="font-sans text-[14px] text-slate opacity-80">
+            South Africa to the World
+          </p>
+          <p className="font-sans text-[12px] text-slate opacity-40">
+            © 2025 Altair Axis Research Lab.
+          </p>
+        </div>
       </div>
     </div>
   </motion.footer>

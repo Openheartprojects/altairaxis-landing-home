@@ -6,45 +6,32 @@ import Footer from '../../../components/deepmind/Footer';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft, Calendar, User, Tag, Share2 } from 'lucide-react';
-
-// Mock Data Database (in a real app, this would be a fetch)
-const articlesDB = {
-    "optimistic-verification": {
-        title: "Optimistic Verification in Untrusted Edge Networks",
-        subtitle: "A probabilistic approach to trustless compute.",
-        image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=2865&auto=format&fit=crop",
-        author: "L. Kenta, J. Doe",
-        date: "Nov 14, 2024",
-        tag: "Distributed Systems",
-        content: `
-            <p class="mb-6 text-xl leading-relaxed text-dm-text-secondary">The core challenge of decentralized inference is verifying that a node performed the computation correctly without re-running the entire computation. Traditional Zero-Knowledge Proofs (ZKPs) are often too computationally expensive for real-time inference. We propose "Optimistic Verification," a protocol inspired by optimistic rollups in Layer 2 blockchains.</p>
-            <h3 class="text-3xl font-serif text-dm-black mt-12 mb-6">The Challenge-Response Mechanism</h3>
-            <p class="mb-6 text-lg leading-relaxed text-gray-600">In our protocol, nodes submit results immediately. A lightweight "verifier" swarm randomly samples tokens from the output and checks them against a lower-fidelity model or a consensus of other nodes. If a discrepancy is found, a dispute resolution process is triggered, potentially slashing the stake of the malicious node.</p>
-            <p class="mb-6 text-lg leading-relaxed text-gray-600">This reduces the verification overhead by 94% while maintaining a security guarantee of 99.99% against rational adversaries.</p>
-             <h3 class="text-3xl font-serif text-dm-black mt-12 mb-6">Implications for Latency</h3>
-             <p class="mb-6 text-lg leading-relaxed text-gray-600">By removing the need for immediate proofs, we can achieve inference speeds comparable to centralized clusters. This is the "Holy Grail" of decentralized AI: trustless execution at centralized speeds.</p>
-        `
-    },
-    // Fallback for other slugs
-    "default": {
-        title: "Research Article Not Found",
-        subtitle: "The requested article could not be located in our archives.",
-        image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2940&auto=format&fit=crop",
-        author: "System",
-        date: "Today",
-        tag: "System",
-        content: "<p>We are constantly publishing new research. Please check back later.</p>"
-    }
-};
+import { getArticleBySlug } from '../../../data/research';
+import { WaterfallDiagram, RadarScan, KnowledgeSidebar, ExpertsExplosion } from '../../../components/research/Illustrations';
 
 const ArticlePage = ({ params }) => {
-    const slug = params?.slug; // Handle undefined params gracefully
+    const slug = params?.slug;
+    const article = getArticleBySlug(slug);
 
-    // Simple look up, in prod use getStaticPaths/Props or server component
-    // For this demo, we'll map the first article and show a generic one for others to demonstrate layout
-    const article = slug === 'optimistic-verification' ? articlesDB['optimistic-verification'] :
-        slug === 'tensor-parallelism' ? { ...articlesDB['default'], title: "Tensor-Parallelism across High-Latency Links", content: "<p>Deep dive into Swarm-TP...</p>" } :
-            articlesDB['default'];
+    if (!article) {
+        return (
+            <main className="min-h-screen bg-dm-white flex flex-col items-center justify-center">
+                <Navbar />
+                <h1 className="text-4xl font-serif text-dm-black mb-4">Article Not Found</h1>
+                <Link href="/research" className="text-dm-blue hover:underline">Back to Research</Link>
+            </main>
+        );
+    }
+
+    const renderIllustration = () => {
+        switch (article.illustrationId) {
+            case 'waterfall': return <WaterfallDiagram />;
+            case 'radar': return <RadarScan />;
+            case 'sidebar': return <KnowledgeSidebar />;
+            case 'experts': return <ExpertsExplosion />;
+            default: return null;
+        }
+    };
 
     return (
         <main className="min-h-screen bg-dm-white text-dm-text-primary font-sans selection:bg-dm-blue selection:text-white">
@@ -74,7 +61,7 @@ const ArticlePage = ({ params }) => {
                             </Link>
                             <div className="flex items-center gap-4 mb-6">
                                 <span className="px-3 py-1 rounded-full bg-dm-blue text-white text-xs font-bold uppercase tracking-wider">
-                                    {article.tag}
+                                    {article.category}
                                 </span>
                                 <span className="text-white/80 text-sm font-medium flex items-center gap-2">
                                     <Calendar className="w-4 h-4" /> {article.date}
@@ -91,26 +78,48 @@ const ArticlePage = ({ params }) => {
                 </div>
 
                 {/* Content Body */}
-                <div className="px-6 md:px-12 py-16 max-w-[800px] mx-auto">
-                    <div className="flex justify-between items-center py-8 border-y border-gray-100 mb-12">
-                        <div className="flex items-center gap-4">
-                            <div className="w-12 h-12 rounded-full bg-gray-200 overflow-hidden relative">
-                                <Image src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=100&h=100" alt="Author" fill className="object-cover" />
+                <div className="px-6 md:px-12 py-16 max-w-[1000px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-16">
+                    <div className="flex flex-col">
+                        <div className="flex justify-between items-center py-8 border-y border-gray-100 mb-12">
+                            <div className="flex items-center gap-4">
+                                <div className="w-12 h-12 rounded-full bg-gray-200 overflow-hidden relative">
+                                    <Image src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=100&h=100" alt="Author" fill className="object-cover" />
+                                </div>
+                                <div>
+                                    <p className="font-medium text-dm-black">{article.author}</p>
+                                    <p className="text-xs text-gray-500 uppercase tracking-widest">Principal Researcher</p>
+                                </div>
                             </div>
-                            <div>
-                                <p className="font-medium text-dm-black">{article.author}</p>
-                                <p className="text-xs text-gray-500 uppercase tracking-widest">Principal Researcher</p>
-                            </div>
+                            <button className="p-3 rounded-full hover:bg-gray-100 text-gray-600 transition-colors">
+                                <Share2 className="w-5 h-5" />
+                            </button>
                         </div>
-                        <button className="p-3 rounded-full hover:bg-gray-100 text-gray-600 transition-colors">
-                            <Share2 className="w-5 h-5" />
-                        </button>
+
+                        <div
+                            className="prose prose-lg prose-gray max-w-none font-serif text-lg md:text-xl text-gray-800"
+                            dangerouslySetInnerHTML={{ __html: article.content }}
+                        />
+
+                        {/* Visual Illustration Section embedded in article */}
+                        {article.illustrationId && (
+                            <div className="my-16 h-[500px] w-full">
+                                {renderIllustration()}
+                            </div>
+                        )}
                     </div>
 
-                    <div
-                        className="prose prose-lg prose-gray max-w-none font-serif text-lg md:text-xl text-gray-800"
-                        dangerouslySetInnerHTML={{ __html: article.content }}
-                    />
+                    {/* Sidebar / Table of Contents / More info - Placeholder for now, or just empty space for editorial feel */}
+                    <div className="hidden lg:block relative">
+                        <div className="sticky top-32">
+                            <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">In this article</p>
+                            <ul className="space-y-4 text-sm text-gray-600 border-l border-gray-200 pl-4">
+                                <li className="hover:text-dm-blue cursor-pointer transition-colors">Summary</li>
+                                <li className="hover:text-dm-blue cursor-pointer transition-colors">Deep Dive</li>
+                                <li className="hover:text-dm-blue cursor-pointer transition-colors">Methodology</li>
+                                <li className="hover:text-dm-blue cursor-pointer transition-colors">Results</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </article>
 

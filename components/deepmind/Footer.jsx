@@ -1,14 +1,13 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowUpRight, Github, Twitter, Linkedin, Instagram } from 'lucide-react';
+import { ArrowUpRight, Github, Twitter, Linkedin, Youtube } from 'lucide-react';
 import Link from 'next/link';
 
 const socialLinks = [
-    { name: 'Twitter', icon: Twitter, href: '#' },
-    { name: 'GitHub', icon: Github, href: '#' },
-    { name: 'LinkedIn', icon: Linkedin, href: '#' },
-    { name: 'Instagram', icon: Instagram, href: '#' },
+    { name: 'Twitter', icon: Twitter, href: 'https://x.com/Apolemia_labs' },
+    { name: 'YouTube', icon: Youtube, href: 'https://www.youtube.com/@Altairaxis' },
+    { name: 'LinkedIn', icon: Linkedin, href: 'https://www.linkedin.com/company/108613073' },
 ];
 
 const footerLinks = [
@@ -33,11 +32,11 @@ const footerLinks = [
     {
         title: "Legal",
         links: [
-            { name: "Privacy Policy", href: "#" },
-            { name: "Terms of Service", href: "#" },
-            { name: "Code of Conduct", href: "#" },
+            { name: "Privacy Policy", href: "/legal/privacy" },
+            { name: "Terms of Service", href: "/legal/terms" },
+            { name: "Code of Conduct", href: "/legal/conduct" },
         ]
-    }
+    },
 ];
 
 const Footer = () => {
@@ -137,7 +136,7 @@ const Footer = () => {
                             &copy; {new Date().getFullYear()} Altair Axis Research Lab.
                         </p>
                         <p className="text-xs text-gray-700 uppercase tracking-widest">
-                            London • San Francisco • Tokyo
+                            South Africa to the World
                         </p>
                     </div>
                 </motion.div>
