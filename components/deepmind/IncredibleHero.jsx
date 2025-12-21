@@ -159,7 +159,7 @@ const IncredibleHero = () => {
         <section className="relative w-full h-[85vh] min-h-[600px] flex items-center justify-center overflow-hidden bg-dm-white text-black">
 
             {/* Notification Bar */}
-            <div className="absolute top-32 md:top-36 left-0 right-0 z-40 flex justify-center pointer-events-none">
+            <div className="absolute top-28 md:top-36 left-0 right-0 z-40 flex justify-center pointer-events-none">
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={notificationIndex}
@@ -210,7 +210,7 @@ const IncredibleHero = () => {
             <div className="relative w-full max-w-[1200px] px-6 h-full flex flex-col md:flex-row items-center justify-center z-20 gap-8 md:gap-12">
 
                 {/* Left: Text Content */}
-                <div className="w-full md:w-5/12 z-30 flex flex-col justify-center items-start pt-44 md:pt-0 pl-0 md:pl-0">
+                <div className="w-full md:w-5/12 z-30 flex flex-col justify-center items-start pt-36 md:pt-0 pl-0 md:pl-0">
                     <AnimatePresence mode='wait'>
                         <motion.div
                             key={activeIndex}
@@ -235,7 +235,7 @@ const IncredibleHero = () => {
                             </div>
 
                             {/* Title - Dark Text for White Theme */}
-                            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight leading-[0.95] md:leading-[0.9] mb-4 md:mb-6 text-dm-black">
+                            <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold tracking-tight leading-[0.95] md:leading-[0.9] mb-4 md:mb-6 text-dm-black">
                                 {slides[activeIndex].title}
                             </h1>
 
