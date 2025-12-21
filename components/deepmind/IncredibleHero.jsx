@@ -159,7 +159,7 @@ const IncredibleHero = () => {
         <section className="relative w-full h-[85vh] min-h-[600px] flex items-center justify-center overflow-hidden bg-dm-white text-black">
 
             {/* Notification Bar */}
-            <div className="absolute top-24 md:top-28 left-0 right-0 z-40 flex justify-center pointer-events-none">
+            <div className="absolute top-32 md:top-36 left-0 right-0 z-40 flex justify-center pointer-events-none">
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={notificationIndex}
@@ -210,7 +210,7 @@ const IncredibleHero = () => {
             <div className="relative w-full max-w-[1200px] px-6 h-full flex flex-col md:flex-row items-center justify-center z-20 gap-8 md:gap-12">
 
                 {/* Left: Text Content */}
-                <div className="w-full md:w-5/12 z-30 flex flex-col justify-center items-start pt-28 md:pt-0 pl-0 md:pl-0">
+                <div className="w-full md:w-5/12 z-30 flex flex-col justify-center items-start pt-44 md:pt-0 pl-0 md:pl-0">
                     <AnimatePresence mode='wait'>
                         <motion.div
                             key={activeIndex}

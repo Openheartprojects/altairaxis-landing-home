@@ -6,7 +6,7 @@ import styles from '../styles';
 import { slideIn, staggerContainer, textVariant } from '../utils/motion';
 
 const Hero = () => (
-  <section className={`${styles.yPaddings} sm:px-16 px-6 bg-off-white min-h-[90vh] flex items-center relative overflow-hidden`}>
+  <section className={`${styles.yPaddings} pt-32 sm:px-16 px-6 bg-off-white min-h-[90vh] flex items-center relative overflow-hidden`}>
 
     {/* Background Atmosphere */}
     <div className="absolute top-0 right-0 w-[50%] h-[50%] gradient-constellation opacity-60 z-0 pointer-events-none" />
@@ -23,7 +23,7 @@ const Hero = () => (
           <span className="font-mono text-altair-violet text-[14px] tracking-[0.2em] uppercase font-bold">Research Laboratory</span>
         </motion.div>
 
-        <motion.h1 variants={textVariant(1.1)} className="font-serif font-bold text-[80px] md:text-[100px] leading-[0.95] text-carbon mb-8 tracking-tighter mix-blend-multiply">
+        <motion.h1 variants={textVariant(1.1)} className="font-serif font-bold text-[44px] sm:text-[80px] md:text-[100px] leading-[0.95] text-carbon mb-8 tracking-tighter mix-blend-multiply">
           Compute for <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-carbon to-slate">Intelligence.</span>
         </motion.h1>

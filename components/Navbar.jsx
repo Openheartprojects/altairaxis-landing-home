@@ -11,7 +11,7 @@ const Navbar = () => (
     variants={navVariants}
     initial="hidden"
     whileInView="show"
-    className={`${styles.xPaddings} py-8 relative z-50`}
+    className={`${styles.xPaddings} py-8 fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-dm-white/70 border-b border-dm-black/5`}
   >
     <div className={`${styles.innerWidth} mx-auto flex justify-between gap-8 items-center`}>
       <Link href="/">
