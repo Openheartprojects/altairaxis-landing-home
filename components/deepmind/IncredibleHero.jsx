@@ -7,40 +7,40 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { pressReleases } from '../../data/press';
 
-// Slide Data
+// Slide Data - Altair Axis (Calibrated for Early Stage)
 const slides = [
     {
         id: 1,
-        tag: "Core Infrastructure",
-        title: "The Intelligence \nLattice.",
-        description: "A self-healing, distributed compute fabric that spans continents. We turn latency into liquidity.",
+        tag: "Core Platform",
+        title: "Run AI Where \nIt Matters.",
+        description: "Altair Axis is a decentralized compute platform building a global edge network. Low latency. Zero bottlenecks.",
         src: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=2940&auto=format&fit=crop",
         icon: Cpu,
         color: "#2563EB" // Blue
     },
     {
         id: 2,
-        tag: "Apolemia Labs",
-        title: "Hive Mind \nSynthesis.",
-        description: "Zero-knowledge coordination for million-node clusters. The first truly decentralized supercomputer.",
+        tag: "Genesis Phase",
+        title: "A New Model \nfor Compute.",
+        description: "We are replacing centralized dependency with a distributed node fabric. Join the network early.",
         src: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2940&auto=format&fit=crop",
         icon: Zap,
         color: "#8B5CF6" // Violet
     },
     {
         id: 3,
-        tag: "KnoLink Engine",
-        title: "Semantic \nResonance.",
-        description: "Don't just search. Resonate. Our engine finds the hidden harmonics in your data lake.",
+        tag: "System Architecture",
+        title: "Distributed \nby Design.",
+        description: "Workloads route dynamically to optimal nodes. Designed for resilience and geographic flexibility.",
         src: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=2940&auto=format&fit=crop",
         icon: Sparkles,
         color: "#10B981" // Emerald
     },
     {
         id: 4,
-        tag: "New Frontiers",
-        title: "Optimistic \nVerification.",
-        description: "Breaking the trilemma of Speed, Security, and Scale. Trustless compute at the speed of light.",
+        tag: "Use Cases",
+        title: "Real-Time \nInference.",
+        description: "Built for latency-sensitive applications that demand performance closer to the user.",
         src: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=2865&auto=format&fit=crop",
         icon: Globe,
         color: "#F43F5E" // Rose
@@ -95,11 +95,6 @@ const IncredibleHero = () => {
     const nextSlide = () => {
         setDirection(1);
         setActiveIndex((prev) => (prev + 1) % slides.length);
-    };
-
-    const prevSlide = () => {
-        setDirection(-1);
-        setActiveIndex((prev) => (prev - 1 + slides.length) % slides.length);
     };
 
     // Calculate styles for "Void Deck" depth effect
@@ -207,143 +202,125 @@ const IncredibleHero = () => {
             {/* 2. Grid Floor (Subtle) */}
             <div className="absolute bottom-0 w-full h-[50vh] bg-gradient-to-t from-white to-transparent z-10 opacity-80" />
 
-            <div className="relative w-full max-w-[1200px] px-6 h-full flex flex-col md:flex-row items-center justify-center z-20 gap-8 md:gap-12">
+            <div className="relative w-full max-w-[1200px] px-6 h-full flex flex-col items-center justify-center z-20 text-center">
 
-                {/* Left: Text Content */}
-                <div className="w-full md:w-5/12 z-30 flex flex-col justify-center items-start pt-36 md:pt-0 pl-0 md:pl-0">
-                    <AnimatePresence mode='wait'>
-                        <motion.div
-                            key={activeIndex}
-                            initial={{ opacity: 0, y: 30, filter: 'blur(10px)' }}
-                            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                            exit={{ opacity: 0, y: -30, filter: 'blur(10px)' }}
-                            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                            className="flex flex-col items-start"
-                        >
-                            {/* Tag */}
-                            <div className="flex items-center gap-3 mb-6">
-                                <span className="flex items-center justify-center w-8 h-8 rounded-full bg-dm-black/5 border border-dm-black/10 text-dm-black/80">
-                                    {/* Dynamic Icon */}
-                                    {(() => {
-                                        const Icon = slides[activeIndex].icon;
-                                        return <Icon className="w-4 h-4" color={slides[activeIndex].color} />;
-                                    })()}
-                                </span>
-                                <span className="font-mono text-xs md:text-sm tracking-[0.2em] uppercase text-dm-black/60">
-                                    {slides[activeIndex].tag}
-                                </span>
-                            </div>
+                {/* Main Content Area */}
+                <div className="relative w-full h-full flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-20">
 
-                            {/* Title - Dark Text for White Theme */}
-                            <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold tracking-tight leading-[0.95] md:leading-[0.9] mb-4 md:mb-6 text-dm-black">
-                                {slides[activeIndex].title}
-                            </h1>
-
-                            {/* Description - Dark Gray */}
-                            <p className="text-base md:text-lg text-dm-black/60 max-w-md leading-relaxed mb-8 border-l-2 border-dm-black/10 pl-6">
-                                {slides[activeIndex].description}
-                            </p>
-
-                            {/* Controls */}
-                            <div className="flex items-center gap-6">
-                                <motion.button
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.95 }}
-                                    onClick={nextSlide}
-                                    className="group relative px-6 py-3 bg-dm-black text-white rounded-full font-bold overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
-                                >
-                                    <span className="relative z-10 flex items-center gap-2 text-sm">
-                                        Explore System <ArrowRight className="w-4 h-4" />
-                                    </span>
-                                    <div className="absolute inset-0 bg-dm-blue scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500" />
-                                </motion.button>
-
-                                <div className="flex gap-2">
-                                    {slides.map((_, i) => (
-                                        <div
-                                            key={i}
-                                            className={`h-1 rounded-full transition-all duration-500 ${i === activeIndex ? 'w-12 bg-dm-black' : 'w-2 bg-dm-black/20'}`}
-                                        />
-                                    ))}
-                                </div>
-                            </div>
-                        </motion.div>
-                    </AnimatePresence>
-                </div>
-
-                {/* Right: The 3D Void Deck */}
-                <div className="w-full md:w-7/12 h-[50vh] md:h-full relative flex items-center justify-center perspective-[1200px]">
-
-                    {/* Perspective Container */}
-                    {/* Perspective Container */}
+                    {/* Left Side: Text Content */}
                     <motion.div
-                        className="relative w-full h-[350px] flex items-center justify-center preserve-3d"
+                        initial={{ opacity: 0, x: -50 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                        className="flex flex-col items-center lg:items-start text-center lg:text-left max-w-xl z-30"
+                    >
+                        {/* Tag */}
+                        <div className="mb-4 px-4 py-1.5 rounded-full bg-dm-black/5 border border-dm-black/10 backdrop-blur-md inline-flex items-center justify-center">
+                            <span className="font-mono text-xs md:text-sm tracking-[0.2em] uppercase text-dm-black/60">
+                                {slides[activeIndex].tag}
+                            </span>
+                        </div>
+
+                        {/* Title */}
+                        <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[0.95] mb-6 md:mb-8 text-dm-black whitespace-pre-line">
+                            {slides[activeIndex].title}
+                        </h1>
+
+                        {/* Description */}
+                        <p className="text-lg md:text-xl text-dm-black/60 max-w-2xl leading-relaxed mb-10">
+                            {slides[activeIndex].description}
+                        </p>
+
+                        {/* Call to Action */}
+                        <div className="flex flex-col sm:flex-row items-center gap-4">
+                            <Link href="/get-started" className="group relative px-8 py-4 bg-dm-black text-white rounded-full font-bold overflow-hidden shadow-lg hover:shadow-xl transition-all hover:-translate-y-0.5">
+                                <span className="relative z-10 flex items-center gap-2 text-sm">
+                                    Get Started <ArrowRight className="w-4 h-4" />
+                                </span>
+                                <div className="absolute inset-0 bg-dm-blue scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500" />
+                            </Link>
+
+                            <Link href="/architecture" className="group px-8 py-4 bg-transparent border border-dm-black/10 text-dm-black rounded-full font-medium hover:bg-dm-black/5 transition-colors">
+                                <span className="flex items-center gap-2 text-sm">
+                                    View Architecture
+                                </span>
+                            </Link>
+                        </div>
+                    </motion.div>
+
+                    {/* Right Side: 3D Carousel */}
+                    <motion.div
                         style={{
                             rotateX,
                             rotateY,
-                            transformStyle: "preserve-3d"
+                            transformStyle: "preserve-3d",
                         }}
+                        className="relative w-[300px] h-[450px] md:w-[350px] md:h-[500px] lg:w-[400px] lg:h-[550px] perspective-[1200px] flex items-center justify-center z-30"
                     >
-                        {slides.map((slide, index) => {
-                            const style = getSlideStyle(index);
-                            const isActive = index === activeIndex;
-
-                            return (
-                                <motion.div
-                                    key={slide.id}
-                                    initial={false}
-                                    animate={{
-                                        zIndex: style.zIndex,
-                                        z: style.z,
-                                        scale: style.scale,
-                                        opacity: style.opacity,
-                                        x: style.x,
-                                        rotateY: style.rotateY,
-                                        filter: style.filter
-                                    }}
-                                    transition={{
-                                        duration: 0.8,
-                                        ease: [0.16, 1, 0.3, 1], // Custom "Out Expo" curve
-                                        opacity: { duration: 0.6 }
-                                    }}
-                                    className="absolute w-[260px] sm:w-[320px] md:w-[450px] aspect-[4/3] rounded-[24px] md:rounded-[32px] overflow-hidden border border-dm-black/5 bg-white shadow-2xl"
-                                    style={{
-                                        // Colored gentle shadow for white theme
-                                        boxShadow: isActive ? `0 30px 60px -15px ${slide.color}25` : '0 20px 40px -10px rgba(0,0,0,0.1)',
-                                    }}
-                                    onClick={() => {
-                                        if (!isActive) nextSlide();
-                                    }}
-                                >
-                                    {/* Image */}
-                                    <div className="relative w-full h-full">
+                        <AnimatePresence initial={false} custom={direction}>
+                            {slides.map((slide, index) => {
+                                const style = getSlideStyle(index);
+                                return (
+                                    <motion.div
+                                        key={slide.id}
+                                        className="absolute w-full h-full rounded-3xl overflow-hidden shadow-2xl cursor-pointer"
+                                        initial={{
+                                            opacity: 0,
+                                            scale: 0.5,
+                                            z: -1000,
+                                            filter: 'blur(10px)',
+                                            rotateY: 0
+                                        }}
+                                        animate={{
+                                            ...style,
+                                            transition: {
+                                                duration: 0.8,
+                                                ease: [0.16, 1, 0.3, 1],
+                                                opacity: { duration: 0.5 }
+                                            }
+                                        }}
+                                        exit={{
+                                            opacity: 0,
+                                            scale: 0.5,
+                                            z: -1000,
+                                            filter: 'blur(10px)',
+                                            rotateY: direction === 1 ? -45 : 45,
+                                            transition: {
+                                                duration: 0.5,
+                                                ease: [0.6, -0.05, 0.01, 0.99]
+                                            }
+                                        }}
+                                        onClick={() => {
+                                            if (index !== activeIndex) {
+                                                setDirection(index > activeIndex ? 1 : -1);
+                                                setActiveIndex(index);
+                                            }
+                                        }}
+                                    >
                                         <Image
                                             src={slide.src}
                                             alt={slide.title}
                                             fill
                                             className="object-cover"
-                                            priority={index < 2}
+                                            priority={index === activeIndex}
+                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                         />
-
-                                        {/* Overlays - Lightened for White Theme */}
-                                        <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/0 to-black/60" />
-
-                                        {/* Sheen */}
-                                        <div className="absolute inset-0 bg-gradient-to-tr from-white/20 via-transparent to-transparent opacity-100" />
-
-                                        {/* Internal Label */}
-                                        <motion.div
-                                            className="absolute bottom-6 left-6"
-                                            animate={{ opacity: isActive ? 1 : 0 }}
-                                        >
-                                            <div className="px-3 py-1 bg-white/20 backdrop-blur-md rounded-full w-fit mb-2">
-                                                <span className="text-[10px] font-mono text-white/95 uppercase tracking-widest">{slide.tag}</span>
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                                        <div className="absolute bottom-0 left-0 p-6 text-white">
+                                            <div className="flex items-center gap-2 mb-2">
+                                                {slide.icon && <slide.icon className="w-5 h-5" style={{ color: slide.color }} />}
+                                                <span className="text-sm font-semibold" style={{ color: slide.color }}>
+                                                    {slide.tag}
+                                                </span>
                                             </div>
-                                        </motion.div>
-                                    </div>
-                                </motion.div>
-                            );
-                        })}
+                                            <h3 className="text-2xl font-bold leading-tight whitespace-pre-line">
+                                                {slide.title}
+                                            </h3>
+                                        </div>
+                                    </motion.div>
+                                );
+                            })}
+                        </AnimatePresence>
                     </motion.div>
                 </div>
 
@@ -353,4 +330,3 @@ const IncredibleHero = () => {
 };
 
 export default IncredibleHero;
-

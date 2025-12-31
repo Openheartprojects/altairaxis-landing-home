@@ -222,7 +222,7 @@ const ConsoleSection = () => {
                         <p className="text-gray-400">Join the specialized network for AI.</p>
                     </div>
                     <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
-                        <Link href="/console" className="px-8 py-4 bg-white text-black rounded-lg font-medium text-center hover:bg-gray-200 transition-colors">
+                        <Link href="https://apolemia-console.onrender.com/login" className="px-8 py-4 bg-white text-black rounded-lg font-medium text-center hover:bg-gray-200 transition-colors">
                             Launch Console
                         </Link>
                         <Link href="/docs/deploy" className="px-8 py-4 bg-transparent border border-white/20 rounded-lg font-medium text-center hover:bg-white/10 transition-colors group flex items-center justify-center gap-2">

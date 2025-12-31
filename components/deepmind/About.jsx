@@ -18,7 +18,7 @@ const TelemetryCard = ({ label, value, subtext, icon: Icon }) => (
             </div>
         </div>
         <div>
-            <div className="text-4xl md:text-5xl font-medium text-dm-black tracking-tighter mb-2 group-hover:text-dm-blue transition-colors">
+            <div className="text-3xl md:text-4xl font-medium text-dm-black tracking-tighter mb-2 group-hover:text-dm-blue transition-colors">
                 {value}
             </div>
             <div className="text-sm text-gray-400 font-sans">{subtext}</div>
@@ -27,16 +27,7 @@ const TelemetryCard = ({ label, value, subtext, icon: Icon }) => (
 );
 
 const About = () => {
-    const [nodes, setNodes] = useState(14205);
-
-    // Simulate live node count
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setNodes(prev => prev + Math.floor(Math.random() * 5) - 2);
-        }, 3000);
-        return () => clearInterval(interval);
-    }, []);
-
+    // Honest Metrics for Early Stage
     return (
         <section className="relative py-20 md:py-32 px-6 bg-dm-white overflow-hidden">
             {/* Background Decoration (Matching Knolink) */}
@@ -60,15 +51,15 @@ const About = () => {
                         <div className="relative z-10">
                             <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/50 border border-white/20 backdrop-blur-sm mb-8 w-fit">
                                 <span className="w-2 h-2 rounded-full bg-dm-blue animate-pulse" />
-                                <span className="font-mono text-xs text-dm-black/70 uppercase tracking-widest">Core Philosophy</span>
+                                <span className="font-mono text-xs text-dm-black/70 uppercase tracking-widest">Vision</span>
                             </span>
 
-                            <h2 className="text-4xl md:text-6xl lg:text-7xl font-medium text-dm-black tracking-tighter leading-[0.95] mb-8">
-                                <span className="text-gray-400">Decoupling intelligence</span> <br />
-                                from the data center.
+                            <h2 className="text-3xl md:text-5xl lg:text-7xl font-medium text-dm-black tracking-tighter leading-[0.95] mb-8">
+                                <span className="text-gray-400">Decentralized compute</span> <br />
+                                for the intelligent web.
                             </h2>
                             <p className="text-xl text-gray-500 max-w-2xl leading-relaxed">
-                                We are returning compute to the edges of the network. Altair Axis unifies the world's fragmented hardware into a single, sovereign silicone fabric.
+                                We are building the fabric for tomorrow's AI. Altair Axis replaces centralized reliance with a distributed, sovereign network — starting today.
                             </p>
                         </div>
                     </motion.div>
@@ -76,9 +67,9 @@ const About = () => {
                     {/* Telemetry: Active Nodes */}
                     <div className="md:col-span-6 lg:col-span-4 lg:row-span-1">
                         <TelemetryCard
-                            label="Active Nodes"
-                            value={nodes.toLocaleString()}
-                            subtext="Distributed GPUs online"
+                            label="Network Status"
+                            value="Genesis"
+                            subtext="Founding nodes online"
                             icon={Server}
                         />
                     </div>
@@ -86,9 +77,9 @@ const About = () => {
                     {/* Telemetry: Latency */}
                     <div className="md:col-span-6 lg:col-span-4 lg:row-span-1">
                         <TelemetryCard
-                            label="Avg. Latency"
-                            value="14ms"
-                            subtext="Global P2P response time"
+                            label="Topology"
+                            value="P2P Mesh"
+                            subtext="Direct node routing"
                             icon={Activity}
                         />
                     </div>
@@ -103,11 +94,11 @@ const About = () => {
 
                             <div className="relative z-10">
                                 <Cpu className="w-8 h-8 text-white mb-4" />
-                                <span className="font-mono text-xs uppercase tracking-widest text-gray-400">Network Access</span>
+                                <span className="font-mono text-xs uppercase tracking-widest text-gray-400">Early Access</span>
                             </div>
 
                             <div className="relative z-10 flex items-center justify-between">
-                                <span className="text-2xl font-medium">Deploy Node</span>
+                                <span className="text-2xl font-medium">Join Network</span>
                                 <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all">
                                     <ArrowRight className="w-5 h-5" />
                                 </div>
@@ -123,7 +114,7 @@ const About = () => {
                         <Link href="/about" className="block h-full p-10 rounded-[32px] bg-white border border-gray-100 flex md:flex-row flex-col items-center justify-between gap-6 group shadow-sm hover:shadow-md transition-shadow">
                             <div>
                                 <span className="font-mono text-xs text-dm-blue uppercase tracking-widest mb-3 block">Research Manifesto</span>
-                                <h3 className="text-3xl font-medium text-dm-black group-hover:text-dm-blue transition-colors">The Architecture of Intelligence.</h3>
+                                <h3 className="text-2xl md:text-3xl font-medium text-dm-black group-hover:text-dm-blue transition-colors">The Architecture of Intelligence.</h3>
                             </div>
                             <div className="flex-shrink-0 px-6 py-3 rounded-full border border-gray-200 text-dm-black font-medium group-hover:bg-dm-black group-hover:text-white transition-colors">
                                 Read Paper
