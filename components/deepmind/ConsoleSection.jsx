@@ -215,10 +215,10 @@ const ConsoleSection = () => {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="mt-6 p-8 md:p-12 rounded-[32px] bg-[#111] text-white flex flex-col md:flex-row items-center justify-between gap-8 border border-white/10"
+                    className="mt-6 p-6 md:p-12 rounded-[32px] bg-[#111] text-white flex flex-col md:flex-row items-center justify-between gap-8 border border-white/10"
                 >
-                    <div>
-                        <h3 className="text-3xl font-medium mb-2">The grid is waiting.</h3>
+                    <div className="text-center md:text-left">
+                        <h3 className="text-2xl md:text-3xl font-medium mb-2">The grid is waiting.</h3>
                         <p className="text-gray-400">Join the specialized network for AI.</p>
                     </div>
                     <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
@@ -230,7 +230,6 @@ const ConsoleSection = () => {
                         </Link>
                     </div>
                 </motion.div>
-
             </div>
         </section>
     );

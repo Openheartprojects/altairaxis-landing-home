@@ -25,7 +25,7 @@ export default function ArchitecturePage() {
             <Navbar />
 
             {/* Hero Section */}
-            <section className="pt-32 pb-20 px-6 border-b border-gray-100">
+            <section className="pt-24 md:pt-32 pb-12 md:pb-20 px-6 border-b border-gray-100">
                 <div className="max-w-4xl mx-auto text-center">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -36,10 +36,10 @@ export default function ArchitecturePage() {
                             <span className="w-2 h-2 rounded-full bg-emerald-500" />
                             Live Topology
                         </div>
-                        <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-8 text-dm-black">
+                        <h1 className="text-4xl md:text-7xl font-bold tracking-tighter mb-6 md:mb-8 text-dm-black">
                             The Logic of the Mesh.
                         </h1>
-                        <p className="text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed">
+                        <p className="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed">
                             Altair Axis is not a cloud. It is a protocol for coordinating decentralized compute. Here is how the network guarantees performance without centralization.
                         </p>
                     </motion.div>

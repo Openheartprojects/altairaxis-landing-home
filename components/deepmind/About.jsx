@@ -43,7 +43,7 @@ const About = () => {
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="md:col-span-12 lg:col-span-8 lg:row-span-2 p-6 md:p-10 lg:p-14 rounded-[40px] bg-dm-gray flex flex-col justify-center relative overflow-hidden"
+                        className="md:col-span-12 lg:col-span-8 lg:row-span-2 p-6 md:p-10 lg:p-14 rounded-[32px] bg-dm-gray flex flex-col justify-center relative overflow-hidden"
                     >
                         {/* Abstract Shape */}
                         <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-white/40 rounded-full blur-[80px] pointer-events-none" />

@@ -11,7 +11,7 @@ export default function GetStarted() {
         <main className="min-h-screen bg-dm-white text-dm-black font-sans selection:bg-dm-blue selection:text-white">
             <Navbar />
 
-            <section className="pt-32 pb-20 px-6">
+            <section className="pt-24 md:pt-32 pb-12 md:pb-20 px-6">
                 <div className="max-w-4xl mx-auto text-center">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -22,10 +22,10 @@ export default function GetStarted() {
                             <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
                             Genesis Phase
                         </div>
-                        <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-8 text-dm-black">
+                        <h1 className="text-4xl md:text-7xl font-bold tracking-tighter mb-6 md:mb-8 text-dm-black">
                             Start Building on Axis.
                         </h1>
-                        <p className="text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed mb-12">
+                        <p className="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed mb-8 md:mb-12">
                             Two ways to join the network. Deploy latency-sensitive models to our distributed fleet, or provision capacity to earn.
                         </p>
                     </motion.div>
