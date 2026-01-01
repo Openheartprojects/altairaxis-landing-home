@@ -11,7 +11,7 @@ const Hero = () => {
 
             <div className="max-w-[1400px] mx-auto px-6 w-full">
                 <motion.h1
-                    className="text-6xl md:text-[5.5rem] leading-[1.1] font-medium tracking-tight mb-8 max-w-4xl"
+                    className="text-4xl sm:text-6xl md:text-[5.5rem] leading-[1.1] font-medium tracking-tight mb-8 max-w-4xl"
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
@@ -23,7 +23,7 @@ const Hero = () => {
                 </motion.h1>
 
                 <motion.p
-                    className="text-xl md:text-2xl text-gray-600 max-w-2xl leading-relaxed mb-12"
+                    className="text-lg sm:text-xl md:text-2xl text-gray-600 max-w-2xl leading-relaxed mb-12"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}

@@ -154,7 +154,7 @@ const IncredibleHero = () => {
         <section className="relative w-full h-[85vh] min-h-[600px] flex items-center justify-center overflow-hidden bg-dm-white text-black">
 
             {/* Notification Bar - Adjusted position for mobile */}
-            <div className="absolute top-24 md:top-36 left-0 right-0 z-40 flex justify-center pointer-events-none px-4">
+            <div className="absolute top-20 md:top-36 left-0 right-0 z-40 flex justify-center pointer-events-none px-4">
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={notificationIndex}
@@ -202,7 +202,7 @@ const IncredibleHero = () => {
             {/* 2. Grid Floor */}
             <div className="absolute bottom-0 w-full h-[50vh] bg-gradient-to-t from-white to-transparent z-10 opacity-80" />
 
-            <div className="relative w-full max-w-[1200px] px-6 h-full flex flex-col items-center justify-center z-20 text-center pt-24 md:pt-0">
+            <div className="relative w-full max-w-[1200px] px-6 h-full flex flex-col items-center justify-center z-20 text-center pt-20 md:pt-0">
 
                 {/* Main Content Area */}
                 <div className="relative w-full h-full flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-20">
@@ -222,7 +222,7 @@ const IncredibleHero = () => {
                         </div>
 
                         {/* Title - Responsive & Wrapping */}
-                        <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight leading-[1] mb-4 md:mb-8 text-dm-black whitespace-pre-wrap">
+                        <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold tracking-tight leading-[1] mb-4 md:mb-8 text-dm-black whitespace-pre-wrap">
                             {slides[activeIndex].title}
                         </h1>
 
@@ -233,14 +233,14 @@ const IncredibleHero = () => {
 
                         {/* Call to Action */}
                         <div className="flex flex-col sm:flex-row items-center gap-3 md:gap-4 w-full sm:w-auto">
-                            <Link href="/get-started" className="w-full sm:w-auto group relative px-6 py-3 md:px-8 md:py-4 bg-dm-black text-white rounded-full font-bold overflow-hidden shadow-lg hover:shadow-xl transition-all hover:-translate-y-0.5">
+                            <Link href="/get-started" className="w-full sm:w-auto group relative px-5 py-2.5 md:px-8 md:py-4 bg-dm-black text-white rounded-full font-bold overflow-hidden shadow-lg hover:shadow-xl transition-all hover:-translate-y-0.5">
                                 <span className="relative z-10 flex items-center justify-center gap-2 text-sm">
                                     Get Started <ArrowRight className="w-4 h-4" />
                                 </span>
                                 <div className="absolute inset-0 bg-dm-blue scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500" />
                             </Link>
 
-                            <Link href="/architecture" className="w-full sm:w-auto group px-6 py-3 md:px-8 md:py-4 bg-transparent border border-dm-black/10 text-dm-black rounded-full font-medium hover:bg-dm-black/5 transition-colors">
+                            <Link href="/architecture" className="w-full sm:w-auto group px-5 py-2.5 md:px-8 md:py-4 bg-transparent border border-dm-black/10 text-dm-black rounded-full font-medium hover:bg-dm-black/5 transition-colors">
                                 <span className="flex items-center justify-center gap-2 text-sm">
                                     View Architecture
                                 </span>
@@ -328,7 +328,7 @@ const IncredibleHero = () => {
                     </motion.div>
 
                     {/* Mobile Only Static Image (No 3D Carousel on small screens to save space) */}
-                    <div className="md:hidden w-full max-w-[320px] aspect-[3/4] rounded-3xl overflow-hidden relative shadow-lg mt-8">
+                    <div className="md:hidden w-full max-w-[280px] sm:max-w-[320px] aspect-[4/5] rounded-3xl overflow-hidden relative shadow-lg mt-6">
                         <Image
                             src={slides[activeIndex].src}
                             alt={slides[activeIndex].title}

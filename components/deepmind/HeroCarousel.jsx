@@ -60,7 +60,7 @@ const HeroCarousel = () => {
     };
 
     return (
-        <section className="relative w-full h-[850px] md:h-[750px] flex items-center justify-center overflow-hidden bg-dm-white font-sans pt-20">
+        <section className="relative w-full h-[800px] md:h-[750px] flex items-center justify-center overflow-hidden bg-dm-white font-sans pt-20">
             {/* Ambient Background */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,0,0,0.02),transparent_70%)]" />
 
@@ -92,7 +92,7 @@ const HeroCarousel = () => {
                         <div className="flex items-center gap-4">
                             <button
                                 onClick={nextSlide}
-                                className="group flex items-center gap-3 px-6 py-3 bg-dm-black text-white rounded-full font-medium hover:bg-dm-blue transition-colors"
+                                className="group flex items-center gap-3 px-5 py-2.5 md:px-6 md:py-3 bg-dm-black text-white rounded-full font-medium hover:bg-dm-blue transition-colors"
                             >
                                 Next Signal <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                             </button>
@@ -135,8 +135,8 @@ const HeroCarousel = () => {
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
-                                    <div className="absolute bottom-0 left-0 p-8 md:p-12">
-                                        <h2 className="text-4xl md:text-6xl font-medium text-white tracking-tight leading-[1] whitespace-pre-line">
+                                    <div className="absolute bottom-0 left-0 p-6 md:p-12">
+                                        <h2 className="text-3xl sm:text-4xl md:text-6xl font-medium text-white tracking-tight leading-[1] whitespace-pre-line">
                                             {slide.title}
                                         </h2>
                                     </div>
